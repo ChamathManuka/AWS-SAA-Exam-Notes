@@ -1,0 +1,108 @@
+# AWS Transfer Family (Exam-Oriented Notes)
+
+## What AWS Transfer Family Is
+AWS Transfer Family is a **fully managed file transfer service** that enables secure file transfers **into and out of AWS storage services** using traditional file transfer protocols.
+
+It is designed for **human-driven or partner-driven file exchanges**, especially where legacy systems or compliance requirements mandate protocols like SFTP or FTPS.
+
+---
+
+## Supported Protocols
+AWS Transfer Family supports the following protocols:
+
+- **SFTP** (Secure File Transfer Protocol)
+- **FTPS**
+- **FTP**
+- **AS2**
+- **Web browser–based uploads**
+
+---
+
+## Supported Storage Targets
+Files transferred using AWS Transfer Family can be stored in:
+
+- **Amazon S3**
+- **Amazon EFS**
+
+---
+
+## Typical Use Cases (Exam & Real-World)
+AWS Transfer Family is commonly used when:
+
+- Business partners upload files via **SFTP**
+- Customers push batch data securely into AWS
+- Legacy systems require **SFTP/FTPS**
+- Compliance mandates secure, auditable file transfers
+- Organizations ingest external data into an **S3-based data lake**
+
+This service is **not** intended for application-to-application streaming or real-time ingestion.
+
+---
+
+## Authentication & Authorization Models
+AWS Transfer Family separates **authentication** from **authorization**, using IAM roles to enforce access control.
+
+### 1. IAM-Based Authentication
+- Each SFTP user is mapped to a **dedicated IAM role**
+- The IAM role defines **exact access** to S3 buckets or prefixes
+  Example: s3://company-ingest/vendor1/
+
+
+This enforces:
+- Least privilege
+- Isolation between users
+- Prevention of data leakage
+
+---
+
+### 2. Identity Provider (IdP) Integration
+For centralized and scalable user management, AWS Transfer Family can integrate with:
+
+- **Amazon Cognito**
+- **SAML-based identity providers**
+- **Custom identity providers**
+
+With IdP integration:
+- Users authenticate via the IdP
+- IAM roles are dynamically assigned
+- Permissions are enforced at the storage level
+
+This is ideal for large partner ecosystems or enterprise environments.
+
+---
+
+## Security & Operational Benefits
+AWS Transfer Family provides:
+
+- Fully managed infrastructure (no servers to maintain)
+- Native integration with IAM
+- Fine-grained access control to S3/EFS
+- Auditable access patterns
+- High availability and scalability
+
+---
+
+## When AWS Transfer Family Is the Right Choice (Exam Signal)
+Choose AWS Transfer Family when a question mentions:
+
+- **SFTP / FTPS / AS2**
+- **Business partners uploading files**
+- **Compliance-driven secure file transfer**
+- **Legacy systems**
+- **Human-initiated file uploads**
+- **Direct upload into S3 or EFS**
+
+---
+
+## When It Is NOT the Right Choice
+Avoid AWS Transfer Family when:
+
+- Low-latency or streaming ingestion is required
+- Application-to-application communication is needed
+- Event-driven or API-based ingestion is preferred
+
+---
+
+## Key Exam Takeaway
+> If the question explicitly requires **SFTP or FTPS into S3/EFS**, the answer is almost always **AWS Transfer Family**.
+
